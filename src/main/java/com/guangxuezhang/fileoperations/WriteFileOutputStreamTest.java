@@ -5,17 +5,17 @@ import org.junit.Test;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class WriteFileTest {
+public class WriteFileOutputStreamTest {
 
-    private final String resPath = System.getProperty("user.dir") + "/src/main/resources/";
-    private final String exampleFilePath = this.resPath + "fileToWrite.txt";
+    private final Resources resources = new Resources();
+    private final String exampleFilename =  "fileToWrite.txt";
 
     public static void main(String[] args) {}
 
     @Test
     public void writeToFileInBytes() {
 
-        try (FileOutputStream fileOutputStream = new FileOutputStream(this.exampleFilePath)) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(resources.getFilePath(this.exampleFilename))) {
 
             String str2File = "PC3 25CM T101";
 
@@ -28,7 +28,7 @@ public class WriteFileTest {
     @Test
     public void appendBytesInFile() {
 
-        try (FileOutputStream foutstream = new FileOutputStream(this.exampleFilePath, true)) {
+        try (FileOutputStream foutstream = new FileOutputStream(resources.getFilePath(this.exampleFilename), true)) {
             String STRappendToFile = " LOOSE";
             foutstream.write(STRappendToFile.getBytes());
 

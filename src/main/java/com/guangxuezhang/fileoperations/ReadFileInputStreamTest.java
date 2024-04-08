@@ -3,14 +3,14 @@ package com.guangxuezhang.fileoperations;
 import java.io.FileInputStream;
 import org.junit.Test;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class ReadFileTest {
-    private final String resPath = System.getProperty("user.dir") + "/src/main/resources/";
+public class ReadFileInputStreamTest {
 
-    private final String exampleFilePath = this.resPath + "BIRCH_ITEM_CODE.txt";
+    private final Resources resources = new Resources();
+
+    // Example file name that is for reading
+    private final String exampleFilename = "BIRCH_ITEM_CODE.txt";
 
     public static void main(String[] args) {
 
@@ -18,7 +18,7 @@ public class ReadFileTest {
 
     @Test
     public void readFileByOneByte() {
-        try (FileInputStream inputStream = new FileInputStream(this.exampleFilePath)) {
+        try (FileInputStream inputStream = new FileInputStream(this.resources.getFilePath(this.exampleFilename))) {
 
             int byteRead;
             while ((byteRead = inputStream.read()) != -1) {
@@ -32,7 +32,7 @@ public class ReadFileTest {
     @Test
     public void readFileByBytes() {
 
-        try (FileInputStream inputStream = new FileInputStream(this.exampleFilePath)) {
+        try (FileInputStream inputStream = new FileInputStream(this.resources.getFilePath(this.exampleFilename))) {
             byte[] bytes = new byte[8];
             int readBytes = 0;
 

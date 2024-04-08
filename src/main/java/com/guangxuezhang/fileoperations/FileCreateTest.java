@@ -10,13 +10,16 @@ import java.io.IOException;
 public class FileCreateTest {
 
     private final Logger logger = LoggerFactory.getLogger(FileCreateTest.class);
-    private final String resourcePath = System.getProperty("user.dir")+"/src/main/resources/";
+
+    // Example file name that will be created
+    private final String exampleFilename = "sampleFilePC.txt";
 
     public static void main(String[] args) {}
 
     @Test
     public void createNewFile() {
-        String sampleFilePath = resourcePath + "sampleFile.txt";
+        Resources resources = new Resources();
+        String sampleFilePath = resources.getFilePath(this.exampleFilename);
 
         try {
             File sampleFile = new File(sampleFilePath);
@@ -37,12 +40,9 @@ public class FileCreateTest {
 
     @Test
     public void createNewFileWithFileAndString() {
-        // new File(File file, String child)
-        File parentFileLocation = new File(System.getProperty("user.dir")+"/src/main/resources");
-        String filename = "sampleFilePC.txt";
-
+        Resources resources = new Resources();
         try {
-            File sampleFilePC = new File(parentFileLocation, filename);
+            File sampleFilePC = new File(resources.getFilePath(), resources.getFilePath(this.exampleFilename));
             if(sampleFilePC.createNewFile()) {
                 System.out.println("File Created: " + sampleFilePC.getName());
             } else {
